@@ -163,3 +163,75 @@ body {
     box-sizing: border-box;
     background-color: #f0f2f5;
 }
+
+/* Стили для текстового блока на странице "О проекте" */
+.about-content {
+    max-width: 700px;
+    padding-left: 1%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    line-height: 1.6;
+    color: #333;
+}
+
+    .about-content h2 {
+        color: #222;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+    }
+
+    .about-content h3 {
+        margin-top: 20px;
+        color: #0066cc;
+    }
+
+    .about-content ul {
+        padding-left: 20px;
+    }
+
+/* Стили для блока отзывов */
+.reviews-section {
+    margin-top: 30px;
+}
+
+.btn-review {
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-review:hover {
+        background-color: #004999;
+    }
+
+/* Карточка отзыва */
+.review-item {
+    background-color: #ffffff;
+    border-left: 4px solid #0066cc;
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.review-author {
+    margin: 0 0 6px 0;
+    color: #222;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #888;
+    margin-left: 10px;
+}
+
+.review-text {
+    margin: 0;
+    font-size: 14px;
+    color: #444;
+}

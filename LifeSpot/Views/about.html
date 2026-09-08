@@ -3,28 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>LifeSpot — О проекте</title>
-    <style>
-        body {
-            padding: 20px;
-            font-family: sans-serif;
-        }
-
-        nav a {
-            margin-right: 20px;
-            text-decoration: none;
-            color: #0066cc;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="/Static/CSS/index.css">
 </head>
 <body>
-    <h1>О проекте LifeSpot</h1>
 
-    <nav>
-        <a href="index.html">Все трансляции</a>
-        <a href="about.html">О проекте</a>
-    </nav>
+    <!-- Сайдбар -->
+    <aside>
+        <div class="navbar">
+            <p><a href="/">Все трансляции</a></p>
+            <p><a href="/about">О проекте</a></p>
+        </div>
+    </aside>
 
-    <p>LifeSpot — это сервис для просмотра прямых трансляций с уличных камер по всему миру.</p>
+    <!-- Шапка -->
+    <header id="header-index">
+        <div class="bordered">
+            <h1>LifeSpot — прямые трансляции с улиц</h1>
+        </div>
+        <p>Информация о нашем сервисе</p>
+    </header>
+
+    <!-- Примечание -->
+    <div class="notice">
+        <p>
+            <strong>Примечание:</strong> трансляции размещены на видеохостинге youtube.com.
+            Их воспроизведение может быть недоступно на территории РФ из-за ограничений скорости доступа к сервису.
+        </p>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="about-content">
+        <h2>О сервисе LifeSpot</h2>
+        <p><strong>LifeSpot</strong> — это удобный агрегатор прямых трансляций с улиц, площадей и достопримечательностей со всего мира.</p>
+
+        <h3>Наша миссия</h3>
+        <p>Дать каждому пользователю возможность виртуально путешествовать, наблюдать за ритмом жизни разных городов и узнавать о текущих событиях в реальном времени.</p>
+
+        <!-- Раздел с отзывами -->
+        <div class="reviews-section">
+            <h3>Отзывы о сервисе</h3>
+            <button class="btn-review" onclick="getReview()">Оставить отзыв</button>
+
+            <!-- Сюда JS будет добавлять отзывы -->
+            <div id="reviews-container"></div>
+        </div>
+    </div>
+
+    <!-- Футер с контактами (контакты не настоящие) -->
+    <footer>
+        <p>Контакты для обратной связи: <a href="mailto:support@lifespot.ru">support@lifespot.ru</a> | Тел: +7 (800) 555-35-35</p>
+        <p>&copy; 2024 LifeSpot. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключение скрипта для отзывов -->
+    <script src="/Static/JS/about.js"></script>
 </body>
 </html>

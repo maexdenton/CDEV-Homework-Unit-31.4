@@ -37,6 +37,17 @@ namespace LifeSpot
                 });
             });
 
+            // Страница "О проекте"
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("about", async context =>
+                {
+                    var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "about.html");
+                    var html = await File.ReadAllTextAsync(viewPath);
+                    await context.Response.WriteAsync(html);
+                });
+            });
+
             // Новый маппинг для файла стилей CSS 
             app.UseEndpoints(endpoints =>
             {
@@ -47,6 +58,18 @@ namespace LifeSpot
                     await context.Response.WriteAsync(html);
                 });
             });
+
+            // Эндпоинт для "/Static/JS/about.js"
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/Static/JS/about.js", async context =>
+                {
+                    var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", "about.js");
+                    var js = await File.ReadAllTextAsync(jsPath); 
+                    await context.Response.WriteAsync(js);
+                });
+            });
+
         }
     }
 }
