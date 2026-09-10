@@ -70,6 +70,27 @@ namespace LifeSpot
                 });
             });
 
+
+            // Эндпоинт для раздачи изображений слайдера
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/Static/Images/{fileName}", async context =>
+                {
+                    var fileName = context.Request.RouteValues["fileName"]?.ToString();
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "Images", fileName ?? "");
+
+                    if (File.Exists(imagePath))
+                    {
+                        await context.Response.SendFileAsync(imagePath);
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 404;
+                    }
+                });
+            });
+
+
         }
     }
 }
