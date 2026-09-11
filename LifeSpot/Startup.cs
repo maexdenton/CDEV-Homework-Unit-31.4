@@ -14,6 +14,7 @@ namespace LifeSpot
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Регистрация необходимых сервисов при необходимости (возможно потребуется позже)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,50 +27,11 @@ namespace LifeSpot
 
             app.UseRouting();
 
-            // Главная страница 
+            // Вызов метода-расширения
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "index.html");
-                    var html = await File.ReadAllTextAsync(viewPath);
-                    await context.Response.WriteAsync(html);
-                });
+                endpoints.MapLifeSpotEndpoints();
             });
-
-            // Страница "О проекте"
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("about", async context =>
-                {
-                    var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "about.html");
-                    var html = await File.ReadAllTextAsync(viewPath);
-                    await context.Response.WriteAsync(html);
-                });
-            });
-
-            // Новый маппинг для файла стилей CSS 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/Static/CSS/index.css", async context =>
-                {
-                    var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "CSS", "index.css");
-                    var html = await File.ReadAllTextAsync(viewPath);
-                    await context.Response.WriteAsync(html);
-                });
-            });
-
-            // Эндпоинт для "/Static/JS/about.js"
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/Static/JS/about.js", async context =>
-                {
-                    var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", "about.js");
-                    var js = await File.ReadAllTextAsync(jsPath); 
-                    await context.Response.WriteAsync(js);
-                });
-            });
-
         }
     }
 }
