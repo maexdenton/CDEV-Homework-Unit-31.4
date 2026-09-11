@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = document.getElementById("nextBtn");
     const slides = document.querySelectorAll(".slide-img");
 
-    if (!track || slides.length === 0) return;
+    if (!track || slides.length === 0) {
+        console.warn("[Slider] Элементы слайдера не найдены на странице.");
+        return;
+    }
 
     let currentIndex = 0;
     const totalSlides = slides.length;
@@ -15,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateSlider = () => {
         track.style.transition = "transform 0.4s ease-out";
         track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Отслеживаем переключение слайдов в консоли
+        console.log(`[Slider] Переключение на слайд №${currentIndex + 1} из ${totalSlides}`);
     };
 
     // Переключение по кнопкам
@@ -32,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let isDragging = false;
     let startX = 0;
     let currentTranslate = 0;
-    let prevTranslate = 0;
 
     wrapper.addEventListener("mousedown", (e) => {
         isDragging = true;
@@ -48,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         track.style.transform = `translateX(${currentTranslate}px)`;
     });
 
-    const endDrag = (e) => {
+    const endDrag = () => {
         if (!isDragging) return;
         isDragging = false;
         const movedBy = currentTranslate - (-currentIndex * wrapper.clientWidth);
@@ -67,19 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.addEventListener("mouseleave", endDrag);
 });
 
+
+
 // Логика отзывов: запрашивает данные у пользователя
 function getReview() {
+    console.log("[Reviews] Старт процесса добавления отзыва...");
+
     // Запрашиваем имя
     let userName = prompt("Введите ваше имя:");
+    console.log("[Reviews] Введенное имя:", userName);
+
     if (!userName || userName.trim() === "") {
-        alert("Имя не может быть пустым!");
+        console.warn("[Reviews] Валидация не пройдена: Имя пользователя не заполнено.");
         return;
     }
 
     // Запрашиваем текст отзыва
     let userComment = prompt("Введите ваш отзыв:");
+    console.log("[Reviews] Введенный текст:", userComment);
+
     if (!userComment || userComment.trim() === "") {
-        alert("Текст отзыва не может быть пустым!");
+        console.warn("[Reviews] Валидация не пройдена: Текст отзыва не заполнен.");
         return;
     }
 
@@ -91,8 +104,16 @@ function getReview() {
 }
 
 // Стрелочная функция: формирует HTML и добавляет отзыв на страницу
-const addReview = (userName, userComment, currentDate) => {
+const addReview =(userName, userComment, currentDate) => {
+    // Раскомментировать, если мы хотим, чтобы браузер ставил паузу при добавлении отзыва
+    //debugger;
+
     let container = document.getElementById("reviews-container");
+
+    if (!container) {
+        console.error("[Reviews] Ошибка: Элемент #reviews-container не найден в DOM-дереве!");
+        return;
+    }
 
     // Создаем карточку отзыва
     let reviewItem = document.createElement("div");
@@ -104,4 +125,11 @@ const addReview = (userName, userComment, currentDate) => {
 
     // Добавляем отзыв в контейнер
     container.appendChild(reviewItem);
+
+    // Информируем об успешном добавлении в консоль, выводя объект с данными
+    console.log("[Reviews] Отзыв успешно опубликован:", {
+        author: userName,
+        comment: userComment,
+        date: currentDate
+    });
 };
